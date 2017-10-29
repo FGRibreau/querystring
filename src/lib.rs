@@ -1,7 +1,7 @@
 pub type QueryParam<'a> = (&'a str, &'a str);
 pub type QueryParams<'a> = Vec<QueryParam<'a>>;
 
-/// Produces a URL query string from a given query by iterating through the hashmap.
+/// Produces a URL query string from a given query by iterating through the vec.
 ///
 /// # Examples
 ///
