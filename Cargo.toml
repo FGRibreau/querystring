@@ -1,0 +1,13 @@
+[package]
+name = "querystring"
+version = "0.1.0"
+authors = ["François-Guillaume RIBREAU <github@fgribreau.com>"]
+repository = "https://github.com/FGRibreau/querystring"
+readme = "README.md"
+documentation = "https://docs.rs/querystring"
+description = "Simple querystring library for rust"
+keywords = ["http", "querystring", "query", "params"]
+categories = ["web-programming"]
+license = "MIT"
+
+[dependencies]
