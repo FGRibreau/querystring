@@ -15,3 +15,35 @@ pub fn stringify(query: QueryParams) -> String {
         acc + tuple.0 + "=" + tuple.1 + "&"
     })
 }
+
+/// Parses a given query string back into a vector of key-value pairs.
+/// Extra/invalid strings will be ignored.
+///
+/// # Examples
+///
+/// ```
+/// extern crate querystring;
+///
+/// assert_eq!(querystring::querify("foo=bar&baz=qux&"), vec![("foo", "bar"), ("baz", "qux")]);
+/// assert_eq!(
+///     querystring::querify("a=b&b=c&something_else=another-thing&notright#&blank=&ignoreme!"),
+///     vec![
+///         ("a", "b"),
+///         ("b", "c"),
+///         ("something_else", "another-thing"),
+///         ("blank", ""),
+///     ]);
+/// assert_eq!(querystring::querify("arbitrary string"), vec![]);
+/// ```
+pub fn querify(string: &str) -> QueryParams {
+    let mut v = Vec::new();
+    for pair in string.split('&') {
+        let mut it = pair.split('=').take(2);
+        let kv = match (it.next(), it.next()) {
+            (Some(k), Some(v)) => (k, v),
+            _ => continue,
+        };
+        v.push(kv);
+    }
+    v
+}
