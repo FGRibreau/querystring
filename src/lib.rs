@@ -8,12 +8,16 @@ pub type QueryParams<'a> = Vec<QueryParam<'a>>;
 /// ```
 /// extern crate querystring;
 ///
-/// assert_eq!(querystring::stringify(vec![("foo", "bar"), ("baz", "qux")]), "foo=bar&baz=qux&");
+/// assert_eq!(querystring::stringify(vec![("foo", "bar"), ("baz", "qux")]), "foo=bar&baz=qux");
 /// ```
 pub fn stringify(query: QueryParams) -> String {
-    query.iter().fold(String::new(), |acc, &tuple| {
-        acc + tuple.0 + "=" + tuple.1 + "&"
-    })
+    query
+        .iter()
+        .fold(String::new(), |acc, &tuple| {
+            acc + tuple.0 + "=" + tuple.1 + "&"
+        })
+        .trim_end_matches('&')
+        .to_string()
 }
 
 /// Parses a given query string back into a vector of key-value pairs.
